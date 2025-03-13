@@ -5,7 +5,6 @@
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -24,11 +23,15 @@ a:hover {
 
 body {
   margin: 0;
-  display: flex;
   place-items: center;
-  min-width: 320px;
+  min-width: 50px;
   min-height: 100vh;
+  background-image: url("https://cdn.prod.website-files.com/678a34983c08d4b83013c5ce/67c5ad9bef2a8f7188e9c2dd_signup%202.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
+
 
 h1 {
   font-size: 3.2em;

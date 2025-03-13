@@ -13,6 +13,7 @@
   }
   
   .nav-links a {
+    margin-right: 20px;
     color: white;
     text-decoration: none;
     font-size: 18px;

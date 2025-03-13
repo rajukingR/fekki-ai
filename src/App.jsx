@@ -1,21 +1,37 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Navbar from "./components/Navbar";
-import Home from "./pages/Home";
-import Dashboard from "./pages/Dashboard";
 import Profile from "./components/Profile";
-import Auth0ProviderWithHistory from "./auth/Auth0ProviderWithHistory"
+import Auth0ProviderWithHistory from "./auth/Auth0ProviderWithHistory";
+import AuthGuard from "./AuthGuard";
+import Home from "./pages/Home";
+
 const App = () => {
   return (
-    <Auth0ProviderWithHistory>
-      <Router>
-        <Navbar />
+    <Router>
+      <Auth0ProviderWithHistory>
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/dashboard" element={<Dashboard />} />
+          {/* Protected Route */}
+          <Route
+            path="/sign-up"
+            element={
+              <AuthGuard>
+                <Profile />
+              </AuthGuard>
+            }
+          />
+          <Route
+            path="/"
+            element={
+              <AuthGuard>
+                <Profile />
+              </AuthGuard>
+            }
+          />
+          
+          {/* Public Route */}
+          <Route path="/home" element={<Home />} />
         </Routes>
-        <Profile />
-      </Router>
-    </Auth0ProviderWithHistory>
+      </Auth0ProviderWithHistory>
+    </Router>
   );
 };
 
