@@ -15,12 +15,12 @@ const App = () => {
         path="/"
         element={
           <AuthGuard>
-            <SignIn /> {/* ✅ Stay on SignIn after login */}
+            <SignIn />
           </AuthGuard>
         }
       />
       <Route path="/login" element={<LoginRedirect />} />
-      <Route path="/sign-up" element={<AuthGuard><Profile /></AuthGuard>} />
+      <Route path="/slot-booking" element={<AuthGuard><Profile /></AuthGuard>} />
       <Route path="/profile" element={<AuthGuard><Profile /></AuthGuard>} />
 
       {/* Catch-all 404 Route */}

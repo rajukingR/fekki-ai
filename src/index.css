@@ -2,7 +2,7 @@ html, body {
   margin: 0;
   padding: 0;
   height: 100%;
-  overflow: hidden; /* Prevent scrolling */
+  /* overflow: hidden; */
 }
 
 body {
@@ -10,9 +10,9 @@ body {
   align-items: center;
   justify-content: start;
   padding: 20px 50px;
-  width: 100vw;
+  width: 100 vw;
   height: 100vh;
-  background-image: url("C:\Users\Saurab\Desktop\auth-app\auth-application\public\banner.png");
+  background-image: url("C:\Users\Saurab\Desktop\auth-app\auth-application\public\banner1.png");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;

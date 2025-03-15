@@ -33,7 +33,7 @@ const SignIn = () => {
             logout({ logoutParams: { returnTo: window.location.origin } })
           }
         >
-          Logout
+          Login
         </Button>
       </Box>
     </Container>

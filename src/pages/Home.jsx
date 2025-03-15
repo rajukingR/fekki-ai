@@ -14,28 +14,22 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { StaticDatePicker } from "@mui/x-date-pickers/StaticDatePicker";
 import { format } from "date-fns";
 import { useNavigate } from "react-router-dom";
+import "./Home.css";
+import Logo from "../../public/logo.png";
 
 const timeSlots = [
-  "8:00 am",
-  "8:30 am",
-  "9:00 am",
-  "9:30 am",
-  "10:00 am",
-  "10:30 am",
-  "11:00 am",
-  "11:30 am",
-  "12:00 pm",
-  "12:30 pm",
-  "1:00 pm",
-  "1:30 pm",
-  "2:00 pm",
-  "2:30 pm",
-  "3:00 pm",
-  "3:30 pm",
-  "4:00 pm",
-  "4:30 pm",
-  "5:00 pm",
-  "5:30 pm",
+  "4:00 PM ",
+  "4:30 PM",
+  "5:00 PM ",
+  "5:30 PM ",
+  "6:00 PM ",
+  "6:30 PM ",
+  "7:00 PM ",
+  "7:30 PM ",
+  "8:00 PM ",
+  "8:30 PM ",
+  "9:00 PM ",
+  "9:30 PM ",
 ];
 
 const Home = () => {
@@ -70,7 +64,7 @@ const Home = () => {
 
     try {
       const response = await fetch(
-        "http://localhost:5000/api/appointment/create",
+        "https://erp.keramruth.com/api/appointment/create",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -96,10 +90,17 @@ const Home = () => {
     }
   };
 
-  const visibleTimeSlots = showAllSlots ? timeSlots : timeSlots.slice(0, 16);
+  const visibleTimeSlots = showAllSlots ? timeSlots : timeSlots.slice(0, 12);
 
   return (
-    <Box sx={{ position: "relative", minHeight: "100vh" }}>
+    <Box
+      sx={{
+        minHeight: "100vh",
+        p: 4,
+        textAlign: "center",
+        display: "contents !important",
+      }}
+    >
       {/* Top Right Avatar */}
       <Box sx={{ position: "absolute", top: 10, right: 20 }}>
         <IconButton>
@@ -114,151 +115,147 @@ const Home = () => {
       </Box>
 
       {/* Main Content */}
-      <Box sx={{ display: "flex", justifyContent: "center", p: 2 }}>
-        <Paper
-          elevation={3}
-          sx={{
-            width: { xs: "90%", sm: "80%", md: "70%" },
-            p: 3,
-            borderRadius: 2,
-            bgcolor: "white",
-            mt: { xs: "50px", md: "100px" },
-          }}
-        >
-          <Box
+      <Box 
+  sx={{ 
+    display: "flex", 
+    justifyContent: "start", 
+    p: 2, 
+    mt: -10, 
+    minHeight: "100vh" // Ensure it takes at least full screen height
+  }}
+>
+  <Paper
+    elevation={3}
+    sx={{
+      width: { xs: "95%", sm: "80%", md: "50%" }, // Responsive Width
+      p: { xs: 2, sm: 3 },
+      borderRadius: 2,
+      bgcolor: "white",
+      mt: { xs: "50px", md: "100px" },
+    }}
+  >
+    <Box sx={{ display: "block", textAlign: "center", mb: 4 }}>
+      <Box component="img" src={Logo} alt="Logo" sx={{ width: 150, height: "auto" }} />
+      <Typography 
+  variant="h5" 
+  fontWeight={500} 
+  sx={{ color: "black", fontFamily: "'Inter Tight', sans-serif" }}
+>
+  Discover the Future of Training with Fekki’s AR Solutions
+</Typography>
+
+    </Box>
+
+    {/* Responsive Layout for Date & Slots */}
+    <Box
+      sx={{
+        display: "flex",
+        flexDirection: { xs: "column", sm: "column", md: "row" },
+        justifyContent: "center",
+        alignItems: "center",
+        gap: { xs: 2, sm: 3, md: 2 },
+      }}
+    >
+      {/* Left Column - Calendar */}
+      <Box sx={{ width: { xs: "100%", sm: "90%", md: "50%" }, textAlign: "center", p: 1 }}>
+        <Typography  variant="h6" 
+  fontWeight={500} 
+  sx={{ color: "black", fontFamily: "'Inter Tight', sans-serif" }}>
+          Select a Date
+        </Typography>
+
+        <LocalizationProvider dateAdapter={AdapterDateFns}>
+          <StaticDatePicker
+            displayStaticWrapperAs="desktop"
+            value={selectedDate}
+            onChange={(newValue) => setSelectedDate(newValue)} 
+             variant="h6"
+            fontWeight={500}
             sx={{
-              display: "flex",
-              flexDirection: { xs: "column", md: "row" },
-              justifyContent: "space-between",
-              alignItems: "center",
-              gap: 3,
+              width: "100%",
+              maxWidth: "300px",
+              mx: "auto",
+              color: "black",
+              fontFamily: "'Inter Tight', sans-serif",
             }}
-          >
-            {/* Left Side - User's Name */}
-            <Box
-              sx={{
-                textAlign: { xs: "center", md: "left" },
-                width: { md: "20%" },
-              }}
-            >
-              <Typography variant="h5" fontWeight="bold">
-                Welcome, {user.name}
-              </Typography>
-            </Box>
-
-            {/* Center - Calendar */}
-            <Box sx={{ flexGrow: 1, textAlign: "center" }}>
-              <Typography variant="h6" fontWeight="bold">
-                Select a Date
-              </Typography>
-              <Typography variant="body2" color="gray">
-                Timezone: Israel Daylight Time (GMT+3)
-              </Typography>
-              <LocalizationProvider dateAdapter={AdapterDateFns}>
-                <StaticDatePicker
-                  displayStaticWrapperAs="desktop"
-                  value={selectedDate}
-                  onChange={(newValue) => setSelectedDate(newValue)}
-                />
-              </LocalizationProvider>
-            </Box>
-
-            {/* Right Side - Time Slots */}
-            <Box sx={{ width: { xs: "100%", md: "30%" }, textAlign: "center" }}>
-              <Typography variant="h6" fontWeight="bold">
-                {format(selectedDate, "EEEE, MMM d")}
-              </Typography>
-
-              <Grid container spacing={1} mt={1}>
-                {visibleTimeSlots.map((time) => (
-                  <Grid item xs={6} key={time}>
-                    <Button
-                      variant={selectedTime === time ? "contained" : "outlined"}
-                      onClick={() => setSelectedTime(time)}
-                      sx={{
-                        width: "100%",
-                        color: selectedTime === time ? "white" : "black",
-                      }}
-                    >
-                      {time}
-                    </Button>
-                  </Grid>
-                ))}
-              </Grid>
-
-              {/* Show/Hide Sessions Button */}
-              <Box mt={2}>
-                {showAllSlots ? (
-                  <Typography
-                    variant="body2"
-                    sx={{ color: "blue", cursor: "pointer" }}
-                    onClick={() => setShowAllSlots(false)}
-                  >
-                    Hide sessions
-                  </Typography>
-                ) : (
-                  <Typography
-                    variant="body2"
-                    sx={{ color: "blue", cursor: "pointer" }}
-                    onClick={() => setShowAllSlots(true)}
-                  >
-                    Show all sessions
-                  </Typography>
-                )}
-              </Box>
-            </Box>
-          </Box>
-
-          {/* Back & Submit Buttons */}
-          <Box
-            sx={{
-              display: "flex",
-              flexDirection: { xs: "column", sm: "row" },
-              justifyContent: "space-between",
-              gap: 2,
-              mt: 4,
-            }}
-          >
-            <Button
-              onClick={handleBack}
-              variant="contained"
-              sx={{
-                px: 4,
-                backgroundColor: "#366A5A",
-                fontWeight: "bold",
-                width: { xs: "100%", sm: "auto" },
-                "&:hover": { backgroundColor: "#2a5248" },
-              }}
-            >
-              Back
-            </Button>
-
-            <Button
-              onClick={handleSubmit}
-              variant="contained"
-              sx={{
-                px: 4,
-                backgroundColor: "#366A5A",
-                fontWeight: "bold",
-                width: { xs: "100%", sm: "auto" },
-                "&:hover": { backgroundColor: "#2a5248" },
-              }}
-            >
-              Submit
-            </Button>
-          </Box>
-        </Paper>
+          />
+        </LocalizationProvider>
       </Box>
+
+      {/* Right Column - Time Slots */}
+      <Box sx={{ width: { xs: "100%", sm: "90%", md: "50%" }, textAlign: "center", p: 1 }}>
+        <Typography variant="h6" 
+  fontWeight={500} 
+  sx={{ color: "black", fontFamily: "'Inter Tight', sans-serif" }}>
+          {format(selectedDate, "EEEE, MMM d")}
+        </Typography>
+
+        <Grid container spacing={1} mt={1}>
+          {visibleTimeSlots.map((time) => (
+            <Grid item xs={6} key={time}>
+              <Button
+                variant={selectedTime === time ? "contained" : "outlined"}
+                onClick={() => setSelectedTime(time)}
+                sx={{
+                  width: "100%",
+                  color: selectedTime === time ? "white" : "black",
+                  fontSize: { xs: "12px", sm: "14px", md: "16px" },
+                }}
+              >
+                {time}
+              </Button>
+            </Grid>
+          ))}
+        </Grid>
+      </Box>
+    </Box>
+
+    {/* Back & Submit Buttons */}
+    <Box
+      sx={{
+        display: "flex",
+        flexDirection: { xs: "column", sm: "row" },
+        justifyContent: "space-between",
+        gap: 2,
+        mt: 2,
+      }}
+    >
+      <Button
+        onClick={handleBack}
+        variant="contained"
+        sx={{
+          px: 4,
+          backgroundColor: "#366A5A",
+          fontWeight: "bold",
+          width: { xs: "100%", sm: "auto" },
+          "&:hover": { backgroundColor: "#2a5248" },
+        }}
+      >
+        Back
+      </Button>
+
+      <Button
+        onClick={handleSubmit}
+        variant="contained"
+        sx={{
+          px: 4,
+          backgroundColor: "#366A5A",
+          fontWeight: "bold",
+          width: { xs: "100%", sm: "auto" },
+          "&:hover": { backgroundColor: "#2a5248" },
+        }}
+      >
+        Submit
+      </Button>
+    </Box>
+  </Paper>
+</Box>
+
     </Box>
   );
 };
 
 export default Home;
-
-
-
-
-
 
 // import React from "react";
 // import { Box, Button, TextField, Typography, Stepper, Step, StepLabel } from "@mui/material";
@@ -338,11 +335,6 @@ export default Home;
 
 // export default MultiStepForm;
 
-
-
-
-
-
 // import React, { useState } from "react";
 // import {
 //   Box,
@@ -395,7 +387,6 @@ export default Home;
 //   const loginUserEmail = user?.email;
 
 //   const loginUserName = user?.name;
-
 
 //   const handleCheckboxChange = (id, stateUpdater) => {
 //     stateUpdater((prev) =>

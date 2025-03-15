@@ -17,6 +17,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 import Logo from "../../public/logo.png";
+import Home from "../pages/Home";
 
 const options = [
   { id: "ar", label: "Augmented Reality (AR)" },
@@ -93,7 +94,7 @@ const ImmersiveTechSelection = () => {
 
     try {
       const response = await fetch(
-        "http://localhost:5000/api/immersive-tech-selections/create",
+        "https://erp.keramruth.com/api/immersive-tech-selections/create",
         {
           method: "POST",
           headers: {
@@ -131,6 +132,9 @@ const ImmersiveTechSelection = () => {
   const handleClose = () => {
     setOpen(false);
   };
+  const SlotsBooking= ()=>{
+    navigate("/slot-booking")
+  }
 
   return (
     <Box
@@ -158,22 +162,20 @@ const ImmersiveTechSelection = () => {
       {isAvatarClicked && (
         <Box sx={{ position: "absolute", top: 70, right: 10 }}>
           <Button
-  variant="contained"
-  sx={{
-    backgroundColor: "#808080", // Gray background
-    color: "white",              // White text
-    "&:hover": {
-      backgroundColor: "#6c6c6c", // Darker gray when hovered
-    },
-  }}
-  size="large"
-  onClick={() =>
-    logout({ logoutParams: { returnTo: window.location.origin } })
-  }
->
-  Logout
-</Button>
-
+            variant="contained"
+            sx={{
+              backgroundColor: "#808080", // Gray background
+              color: "white", // White text
+              "&:hover": {
+                backgroundColor: "#6c6c6c", // Darker gray when hovered
+              },
+            }}
+            onClick={() =>
+              logout({ logoutParams: { returnTo: window.location.origin } })
+            }
+          >
+            Logout
+          </Button>
         </Box>
       )}
 
@@ -188,6 +190,7 @@ const ImmersiveTechSelection = () => {
       <Typography variant="h5" fontWeight="bold" sx={{ color: "black" }}>
         Discover the Future of Training with Fekki’s AR Solutions
       </Typography>
+
 
       <Box
         sx={{
@@ -385,9 +388,17 @@ const ImmersiveTechSelection = () => {
             Thank you! We will get back to you soon.
           </DialogContentText>
           <DialogActions>
-            <Button
+            {/* <Button
               onClick={() =>
                 (window.location.href = "https://fekki.ai/fekki-io/thank-you/")
+              }
+            >
+              OK
+            </Button> */}
+
+            <Button
+              onClick={() =>
+                SlotsBooking()
               }
             >
               OK

@@ -5,7 +5,8 @@ const Auth0ProviderWithHistory = ({ children }) => {
   const navigate = useNavigate();
   const domain = import.meta.env.VITE_AUTH0_DOMAIN;
   const clientId = import.meta.env.VITE_AUTH0_CLIENT_ID;
-  const redirectUri = import.meta.env.VITE_AUTH0_CALLBACK_URL; 
+  const redirectUri = "https://rajukingr.github.io/fekki-ai/";
+  ; 
 
   const onRedirectCallback = (appState) => {
     navigate(appState?.returnTo || "/profile");
