@@ -1,20 +1,12 @@
 import { useAuth0 } from "@auth0/auth0-react";
 
 const LoginButton = () => {
-  const { loginWithPopup, user, isAuthenticated } = useAuth0();
-
-  const handleLogin = async () => {
-    await loginWithPopup();
-  };
+  const { loginWithRedirect } = useAuth0();
 
   return (
-    !isAuthenticated ? (
-      <button onClick={handleLogin} className="btn">
-        Log In
-      </button>
-    ) : (
-      <p>Welcome, {user?.name}</p>
-    )
+    <button onClick={() => loginWithRedirect()}>
+      Log in with Auth0
+    </button>
   );
 };
 

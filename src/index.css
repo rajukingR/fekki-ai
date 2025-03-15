@@ -1,36 +1,23 @@
-:root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden; /* Prevent scrolling */
 }
 
 body {
-  margin: 0;
-  place-items: center;
-  min-width: 50px;
-  min-height: 100vh;
-  background-image: url("https://cdn.prod.website-files.com/678a34983c08d4b83013c5ce/67c5ad9bef2a8f7188e9c2dd_signup%202.png");
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  padding: 20px 50px;
+  width: 100vw;
+  height: 100vh;
+  background-image: url("C:\Users\Saurab\Desktop\auth-app\auth-application\public\banner.png");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
 }
+
 
 
 h1 {
@@ -69,3 +56,14 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+
+
+@media screen and (max-width: 480px) {
+
+    body {
+    padding: 0px;
+  }
+  #root{
+    padding: 10px !important;
+  }
+  }

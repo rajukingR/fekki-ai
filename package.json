@@ -3,21 +3,22 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://rajukingR.github.io/fekki-ai",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist"
+    "preview": "vite preview"
   },
   "dependencies": {
     "@auth0/auth0-react": "^2.3.0",
-    "@emotion/react": "^11.14.0",
-    "@emotion/styled": "^11.14.0",
+    "@date-io/date-fns": "^3.2.1",
+    "@mui/icons-material": "^6.4.7",
+    "@mui/lab": "^6.0.0-beta.30",
     "@mui/material": "^6.4.7",
+    "@mui/x-date-pickers": "^7.27.3",
+    "date-fns": "^2.29.3",
     "react": "^19.0.0",
+    "react-datepicker": "^8.2.0",
     "react-dom": "^19.0.0",
     "react-router-dom": "^7.3.0"
   },

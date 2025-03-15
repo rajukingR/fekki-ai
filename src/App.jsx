@@ -3,35 +3,32 @@ import Profile from "./components/Profile";
 import Auth0ProviderWithHistory from "./auth/Auth0ProviderWithHistory";
 import AuthGuard from "./AuthGuard";
 import Home from "./pages/Home";
+import LoginRedirect from "./components/LoginRedirect"; // Updated
+import SignIn from "./components/SignIn";
 
 const App = () => {
   return (
     <Router>
-      <Auth0ProviderWithHistory>
-        <Routes>
-          {/* Protected Route */}
-          <Route
-            path="/sign-up"
-            element={
-              <AuthGuard>
-                <Profile />
-              </AuthGuard>
-            }
-          />
-          <Route
-            path="/"
-            element={
-              <AuthGuard>
-                <Profile />
-              </AuthGuard>
-            }
-          />
-          
-          {/* Public Route */}
-          <Route path="/home" element={<Home />} />
-        </Routes>
-      </Auth0ProviderWithHistory>
-    </Router>
+  <Auth0ProviderWithHistory>
+    <Routes>
+      <Route
+        path="/"
+        element={
+          <AuthGuard>
+            <SignIn /> {/* ✅ Stay on SignIn after login */}
+          </AuthGuard>
+        }
+      />
+      <Route path="/login" element={<LoginRedirect />} />
+      <Route path="/sign-up" element={<AuthGuard><Profile /></AuthGuard>} />
+      <Route path="/profile" element={<AuthGuard><Profile /></AuthGuard>} />
+
+      {/* Catch-all 404 Route */}
+      <Route path="*" element={<h2>404 Page Not Found</h2>} />
+    </Routes>
+  </Auth0ProviderWithHistory>
+</Router>
+
   );
 };
 
